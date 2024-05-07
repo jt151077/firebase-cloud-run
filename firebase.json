@@ -1,0 +1,36 @@
+{
+  "emulators": {
+    "functions": {
+      "port": 5001,
+      "host": "0.0.0.0"
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "database": {
+      "port": 9000,
+      "host": "0.0.0.0"
+    },
+    "hosting": {
+      "port": 5000,
+      "host": "0.0.0.0"
+    }
+  },
+  "hosting": {
+    "rewrites": [ {
+      "source": "/",
+      "run": {
+        "serviceId": "frontend",  
+        "region": "europe-west1",    
+        "pinTag": true             
+      }
+    } ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  }
+}

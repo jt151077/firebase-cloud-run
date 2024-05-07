@@ -1,0 +1,17 @@
+steps:
+  # Build and tag using commit sha
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '.', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/run-image/incrementer:latest', '-f', 'Dockerfile']
+    dir: 'incrementer'
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_REGION}-docker.pkg.dev/$PROJECT_ID/run-image/incrementer:latest']  
+  # Build and tag using commit sha
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '.', '-t', '${_REGION}-docker.pkg.dev/$PROJECT_ID/run-image/frontend:latest', '-f', 'Dockerfile']
+    dir: 'frontend'
+  # Push the container image to Artifact Registry
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_REGION}-docker.pkg.dev/$PROJECT_ID/run-image/frontend:latest']  
+options:
+  logging: CLOUD_LOGGING_ONLY
